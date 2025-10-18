@@ -349,9 +349,9 @@ const Index = () => {
       <div className="gradient-90s p-6 retro-border border-primary">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-bold text-white text-shadow-retro mb-2">
-            🤖 AI ЧАТ-БОТ 2025
+            🤖 AI ЧАТ-БОТ 2027
           </h1>
-          <p className="text-white/90 text-sm">Запуск: 12 декабря 2025</p>
+          <p className="text-white/90 text-sm">Запуск: 12 декабря 2027 года • Поработаем!</p>
         </div>
       </div>
 
@@ -388,7 +388,7 @@ const Index = () => {
 
       <div className="fixed bottom-4 right-4 flex items-center gap-2 bg-accent px-4 py-2 retro-border border-accent text-accent-foreground">
         <div className="w-2 h-2 bg-green-500 rounded-full animate-blink" />
-        <span className="text-xs font-bold">ONLINE</span>
+        <span className="text-xs font-bold">АЛЬФА 0</span>
       </div>
     </div>
   );
