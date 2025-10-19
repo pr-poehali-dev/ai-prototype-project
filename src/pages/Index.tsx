@@ -229,9 +229,7 @@ const Index = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <div className="gradient-90s p-6 retro-border border-primary">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-3xl md:text-5xl font-bold text-white text-shadow-retro mb-2">
-            🤖 AI ЧАТ-БОТ 2027
-          </h1>
+          <h1 className="text-3xl md:text-5xl font-bold text-white text-shadow-retro mb-2">🤖 AI ЧАТ-БОТ 2025</h1>
           <p className="text-white/90 text-sm md:text-base">
             Запуск через 56 минут • Поработаем!
           </p>
