@@ -61,16 +61,40 @@ const Index = () => {
 
   useEffect(() => {
     if (isReady) {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 1);
+      oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 2);
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 2);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 2);
+
       const timer1 = setTimeout(() => setShowSequence(1), 500);
-      const timer2 = setTimeout(() => setShowSequence(2), 3500);
-      const timer3 = setTimeout(() => setShowSequence(3), 6500);
-      const timer4 = setTimeout(() => setShowChat(true), 9500);
+      const timer2 = setTimeout(() => setShowSequence(0), 13000);
+      const timer3 = setTimeout(() => setShowSequence(2), 13500);
+      const timer4 = setTimeout(() => setShowSequence(0), 26500);
+      const timer5 = setTimeout(() => setShowSequence(3), 27000);
+      const timer6 = setTimeout(() => setShowChat(true), 40000);
 
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
         clearTimeout(timer3);
         clearTimeout(timer4);
+        clearTimeout(timer5);
+        clearTimeout(timer6);
+        oscillator.disconnect();
+        gainNode.disconnect();
       };
     }
   }, [isReady]);
@@ -179,7 +203,7 @@ const Index = () => {
     );
   }
 
-  if (isReady && showSequence > 0) {
+  if (isReady) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         {showSequence === 1 && (
