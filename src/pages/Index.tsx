@@ -99,7 +99,7 @@ const Index = () => {
     }
   }, [isReady]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage: Message = {
@@ -109,35 +109,40 @@ const Index = () => {
       timestamp: new Date(),
     };
 
+    const currentInput = inputValue;
     setMessages([...messages, userMessage]);
     setInputValue('');
 
-    setTimeout(() => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/7c035ee9-166a-4b38-aea0-620a5c7a388b', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: currentInput }),
+      });
+
+      const data = await response.json();
+      
       const botResponse: Message = {
         id: messages.length + 2,
-        text: getBotResponse(inputValue),
+        text: data.response || '🤔 Не смог получить ответ',
         sender: 'bot',
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, botResponse]);
-    }, 800);
+    } catch (error) {
+      const errorResponse: Message = {
+        id: messages.length + 2,
+        text: '⚠️ Ошибка связи. Попробуй ещё раз.',
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorResponse]);
+    }
   };
 
-  const getBotResponse = (userInput: string): string => {
-    const input = userInput.toLowerCase();
-    
-    if (input.includes('привет') || input.includes('здравствуй')) {
-      return '🎉 Рад тебя видеть! Чем могу помочь?';
-    }
-    if (input.includes('как дела') || input.includes('как ты')) {
-      return '😊 Отлично! Готов помогать. А у тебя как?';
-    }
-    if (input.includes('2017') || input.includes('2024') || input.includes('2025')) {
-      return '📅 Каждый год приносит что-то новое. Главное — двигаться вперёд!';
-    }
-    
-    return '🤔 Интересно! Расскажи подробнее.';
-  };
+
 
   if (showChat) {
     return (
