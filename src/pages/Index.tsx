@@ -14,11 +14,12 @@ const Index = () => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const targetDate = new Date('2025-12-12T00:00:00').getTime();
+    const now = new Date();
+    const targetDate = new Date(now.getTime() + 56 * 60 * 1000);
 
     const updateCountdown = () => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+      const currentTime = new Date().getTime();
+      const distance = targetDate.getTime() - currentTime;
 
       if (distance < 0) {
         setIsReady(true);
