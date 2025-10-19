@@ -34,7 +34,7 @@ const Index = () => {
 
   useEffect(() => {
     const now = new Date();
-    const targetDate = new Date(now.getTime() + 18 * 1000);
+    const targetDate = new Date(now.getTime() + 1 * 1000);
 
     const updateCountdown = () => {
       const currentTime = new Date().getTime();
@@ -305,7 +305,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-3xl md:text-5xl font-bold text-white text-shadow-retro mb-2">🤖 AI ЧАТ-БОТ 2025</h1>
           <p className="text-white/90 text-sm md:text-base">
-            Запуск через 18 секунд • Поработаем!
+            Запуск через 1 секунду • Поработаем!
           </p>
         </div>
       </div>
