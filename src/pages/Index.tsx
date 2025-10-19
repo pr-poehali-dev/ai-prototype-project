@@ -34,7 +34,7 @@ const Index = () => {
 
   useEffect(() => {
     const now = new Date();
-    const targetDate = new Date(now.getTime() + 56 * 60 * 1000);
+    const targetDate = new Date(now.getTime() + 1 * 60 * 1000);
 
     const updateCountdown = () => {
       const currentTime = new Date().getTime();
@@ -205,19 +205,93 @@ const Index = () => {
 
   if (isReady) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4 glitch-container">
+        <style>{`
+          @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+          }
+          
+          @keyframes rgb-split {
+            0% { text-shadow: 2px 2px 0 rgba(255,0,0,0.5), -2px -2px 0 rgba(0,255,255,0.5); }
+            25% { text-shadow: -2px 2px 0 rgba(255,0,0,0.5), 2px -2px 0 rgba(0,255,255,0.5); }
+            50% { text-shadow: 2px -2px 0 rgba(255,0,0,0.5), -2px 2px 0 rgba(0,255,255,0.5); }
+            75% { text-shadow: -2px -2px 0 rgba(255,0,0,0.5), 2px 2px 0 rgba(0,255,255,0.5); }
+            100% { text-shadow: 2px 2px 0 rgba(255,0,0,0.5), -2px -2px 0 rgba(0,255,255,0.5); }
+          }
+          
+          @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+          }
+          
+          @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            41% { opacity: 1; }
+            42% { opacity: 0.8; }
+            43% { opacity: 1; }
+            45% { opacity: 0.9; }
+            46% { opacity: 1; }
+          }
+          
+          .glitch-container {
+            animation: glitch 0.3s infinite;
+            position: relative;
+            overflow: hidden;
+          }
+          
+          .glitch-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: scanline 3s linear infinite;
+            z-index: 1000;
+          }
+          
+          .glitch-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 2px,
+              rgba(0, 0, 0, 0.05) 2px,
+              rgba(0, 0, 0, 0.05) 4px
+            );
+            pointer-events: none;
+            z-index: 999;
+            animation: flicker 0.15s infinite;
+          }
+          
+          .glitch-text {
+            animation: rgb-split 0.2s infinite;
+          }
+        `}</style>
+        
         {showSequence === 1 && (
-          <h1 className="text-4xl md:text-7xl font-bold text-primary text-shadow-retro text-center animate-fade-in px-4">
+          <h1 className="text-4xl md:text-7xl font-bold text-primary text-shadow-retro text-center animate-fade-in px-4 glitch-text">
             МЫ ГОТОВЫ! 🚀
           </h1>
         )}
         {showSequence === 2 && (
-          <h1 className="text-3xl md:text-6xl font-bold text-secondary text-shadow-retro text-center animate-fade-in px-4">
+          <h1 className="text-3xl md:text-6xl font-bold text-secondary text-shadow-retro text-center animate-fade-in px-4 glitch-text">
             2017 был лучшим для меня
           </h1>
         )}
         {showSequence === 3 && (
-          <h1 className="text-3xl md:text-6xl font-bold text-accent text-shadow-retro text-center animate-fade-in px-4">
+          <h1 className="text-3xl md:text-6xl font-bold text-accent text-shadow-retro text-center animate-fade-in px-4 glitch-text">
             2024 год был худшим, а 2025 год еще посмотрим
           </h1>
         )}
@@ -231,7 +305,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-3xl md:text-5xl font-bold text-white text-shadow-retro mb-2">🤖 AI ЧАТ-БОТ 2025</h1>
           <p className="text-white/90 text-sm md:text-base">
-            Запуск через 56 минут • Поработаем!
+            Запуск через 1 минуту • Поработаем!
           </p>
         </div>
       </div>
