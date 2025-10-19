@@ -299,7 +299,7 @@ const Index = () => {
                     <div className="w-full bg-muted retro-border border-muted h-4 mb-2">
                       <div className="bg-accent h-full animate-pulse" style={{ width: '92%' }} />
                     </div>
-                    <p className="text-xs text-muted-foreground">92% завершено</p>
+                    <p className="text-xs text-muted-foreground">99.1% завершено</p>
                   </div>
                 </div>
               </Card>
